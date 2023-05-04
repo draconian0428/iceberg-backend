@@ -9,7 +9,7 @@ const app = express();
 app.get('/getnfts', async (req: Request, res: Response) => {
   const result = await BaseNFT.find();
   if (!result) {
-    res.status(500).json({
+    res.status(400).json({
       ok: false,
     })
   }
@@ -28,7 +28,7 @@ app.post('/getnft', async (req: Request, res: Response) => {
   const result = await BaseNFT.findById(req.body._id);
 
   if (!result) {
-    res.status(500).json({
+    res.status(400).json({
       ok: false
     })
   }
@@ -85,7 +85,7 @@ app.post('/createmynft', async (req: Request, res: Response) => {
 app.post('/getmynfts', async (req: Request, res: Response) => {
 
   if (!req.body.uName) {
-    return res.status(500).json({
+    return res.status(404).json({
       err: 'User name is not defined'
     })
   }
